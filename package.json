@@ -15,7 +15,6 @@
   "keywords": [],
   "author": "Guilherme Campos",
   "license": "ISC",
-  "type": "module",
   "bugs": {
     "url": "https://github.com/guilhermexpc/rkt-fs-api-restaurant/issues"
   },
