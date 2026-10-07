@@ -4,8 +4,9 @@ export default {
     filename: "./src/database/database.db"
   },
   pool: {
-    afterCreate: (conn: any, cb: any) => {
-      conn.run("PRAGMA foreign_keys = ON", cb);
+    afterCreate: (connection: any, done: any) => {
+      connection.run("PRAGMA foreign_keys = ON", done());
+      done();
     }
   },
 
