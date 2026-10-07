@@ -1,0 +1,27 @@
+{
+  "name": "rkt-fs-api-restaurant",
+  "version": "1.0.0",
+  "description": "API de gerenciamento de pedidos de restaurante.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guilhermexpc/rkt-fs-api-restaurant.git"
+  },
+  "keywords": [],
+  "author": "Guilherme Campos",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/guilhermexpc/rkt-fs-api-restaurant/issues"
+  },
+  "homepage": "https://github.com/guilhermexpc/rkt-fs-api-restaurant#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.12",
+    "typescript": "^5.5.4"
+  }
+}
