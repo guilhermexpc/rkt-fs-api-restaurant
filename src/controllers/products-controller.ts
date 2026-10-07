@@ -8,7 +8,14 @@ class ProductsController {
   async index(request: Request, response: Response, next: NextFunction) {
     try {
       // throw new AppError("This is a custom error", 400);
-      return response.json({ message: "Products index" });
+      const { name } = request.query;
+
+      const products = await knexConnection<ProductRepository>("products")
+        .select()
+        .whereLike("name", `%${name ?? ""}%`)
+        .orderBy("name");
+
+      return response.json(products);
     } catch (error) {
       next(error);
     }
