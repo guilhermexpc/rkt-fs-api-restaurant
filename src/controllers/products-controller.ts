@@ -23,9 +23,9 @@ class ProductsController {
 
       const { name, price } = bodySchema.parse(request.body);
 
-      // await knexConnection("products").insert({ name, price });
+      await knexConnection<ProductRepository>("products").insert({ name, price });
 
-      return response.json({ name, price });
+      return response.status(201).json({ name, price });
     } catch (error) {
       next(error);
     }
