@@ -55,6 +55,22 @@ class RestTableSessionController {
     try {
       const id = sessionsIdSchema.parse(request.params.id);
 
+      const session = await knexConnection<RestTablesSessionRepository>("rest_tables_sessions").where({ id }).first();
+
+      if (!session) {
+        throw new AppError("Session table was not found", 404);
+      }
+
+      if (session.closed_at) {
+        throw new AppError("This session table is already closed", 400);
+      }
+
+      await knexConnection<RestTablesSessionRepository>("rest_tables_sessions")
+        .update({
+          closed_at: knexConnection.fn.now()
+        })
+        .where({ id });
+
       return response.json();
     } catch (error) {
       next(error);
