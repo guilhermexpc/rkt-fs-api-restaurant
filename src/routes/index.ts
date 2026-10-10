@@ -8,6 +8,6 @@ const routes = Router();
 // setup all routes
 routes.use("/products", productsRoutes);
 routes.use("/restaurant-tables", restaurantTablesRouter);
-routes.use("/rest-table-sessions", restTableSessionsRouter);
+routes.use("/rest-tables-sessions", restTableSessionsRouter);
 
 export { routes };
