@@ -3,6 +3,7 @@ import { knexConnection } from "@/database/knex";
 import { z } from "zod";
 
 import { AppError } from "@/utils/AppError.js";
+import { TABLES } from "@/database/tables-config";
 
 const productSchema = z.object({
   name: z.string().trim().min(6),
@@ -20,7 +21,7 @@ class ProductsController {
       // throw new AppError("This is a custom error", 400);
       const { name } = request.query;
 
-      const products = await knexConnection<ProductRepository>("products")
+      const products = await knexConnection<ProductRepository>(TABLES.products)
         .select()
         .whereLike("name", `%${name ?? ""}%`)
         .orderBy("name");
@@ -41,7 +42,7 @@ class ProductsController {
 
       const { name, price } = productSchema.parse(request.body);
 
-      await knexConnection<ProductRepository>("products").insert({ name, price });
+      await knexConnection<ProductRepository>(TABLES.products).insert({ name, price });
 
       return response.status(201).json({ name, price });
     } catch (error) {
@@ -61,13 +62,13 @@ class ProductsController {
       const id = productIdSchema.parse(request.params.id);
       const { name, price } = productSchema.parse(request.body);
 
-      const product = await knexConnection<ProductRepository>("products").where({ id: id }).first();
+      const product = await knexConnection<ProductRepository>(TABLES.products).where({ id: id }).first();
 
       if (!product) {
         throw new AppError("Product not found");
       }
 
-      await knexConnection<ProductRepository>("products")
+      await knexConnection<ProductRepository>(TABLES.products)
         .where({ id: id })
         .update({ name, price, updated_at: knexConnection.fn.now() });
 
@@ -81,13 +82,13 @@ class ProductsController {
     try {
       const id = productIdSchema.parse(request.params.id);
 
-      const product = await knexConnection<ProductRepository>("products").where({ id: id }).first();
+      const product = await knexConnection<ProductRepository>(TABLES.products).where({ id: id }).first();
 
       if (!product) {
         throw new AppError("Product not found", 404);
       }
 
-      await knexConnection<ProductRepository>("products").where({ id: id }).delete();
+      await knexConnection<ProductRepository>(TABLES.products).where({ id: id }).delete();
 
       return response.json({ message: "Product deleted" });
     } catch (error) {

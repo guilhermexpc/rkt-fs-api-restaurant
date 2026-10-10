@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import { knexConnection } from "@/database/knex";
 import { AppError } from "@/utils/AppError";
+import { TABLES } from "@/database/tables-config";
 
 const sessionsIdSchema = z
   .string()
@@ -20,7 +21,7 @@ class RestTableSessionController {
       // // Validate the request body against the schema
       const { table_id } = bodySchema.parse(request.body);
 
-      const sessionExists = await knexConnection<RestTablesSessionRepository>("rest_tables_sessions")
+      const sessionExists = await knexConnection<RestTablesSessionRepository>(TABLES.restTableSessions)
         .where({ table_id, closed_at: null })
         .first();
 
@@ -28,7 +29,7 @@ class RestTableSessionController {
         throw new AppError("This table is already  open", 400);
       }
 
-      await knexConnection<RestTablesSessionRepository>("rest_tables_sessions").insert({
+      await knexConnection<RestTablesSessionRepository>(TABLES.restTableSessions).insert({
         table_id,
         opened_at: knexConnection.fn.now()
       });
@@ -41,7 +42,7 @@ class RestTableSessionController {
 
   async index(request: Request, response: Response, next: NextFunction) {
     try {
-      const sessions = await knexConnection<RestTablesSessionRepository>("rest_tables_sessions")
+      const sessions = await knexConnection<RestTablesSessionRepository>(TABLES.restTableSessions)
         .select("id", "table_id", "opened_at", "closed_at")
         .orderBy("closed_at", "asc");
 
@@ -55,7 +56,7 @@ class RestTableSessionController {
     try {
       const id = sessionsIdSchema.parse(request.params.id);
 
-      const session = await knexConnection<RestTablesSessionRepository>("rest_tables_sessions").where({ id }).first();
+      const session = await knexConnection<RestTablesSessionRepository>(TABLES.restTableSessions).where({ id }).first();
 
       if (!session) {
         throw new AppError("Session table was not found", 404);
@@ -65,7 +66,7 @@ class RestTableSessionController {
         throw new AppError("This session table is already closed", 400);
       }
 
-      await knexConnection<RestTablesSessionRepository>("rest_tables_sessions")
+      await knexConnection<RestTablesSessionRepository>(TABLES.restTableSessions)
         .update({
           closed_at: knexConnection.fn.now()
         })
