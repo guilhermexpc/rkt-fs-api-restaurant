@@ -1,0 +1,325 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: API Restaurant
+meta:
+  id: wrk_1559acf9bf8c4960b37a1b1e0bed5a8d
+  created: 1791378979255
+  modified: 1791378979255
+  description: ""
+collection:
+  - name: Products
+    meta:
+      id: fld_bada2c5b366f4d2b9e62a8384223d274
+      created: 1791379097734
+      modified: 1791572025681
+      sortKey: -1791379097734
+      description: ""
+    children:
+      - url: "{{ _.BASE_URL }}/{{ _.RESOURCE }}"
+        name: Index
+        meta:
+          id: req_55644a76663d480ebd2eca8927a0f381
+          created: 1791379145672
+          modified: 1791422486614
+          isPrivate: false
+          description: ""
+          sortKey: -1791379145672
+        method: GET
+        parameters:
+          - name: name
+            value: ""
+            description: ""
+            disabled: true
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.BASE_URL }}/{{ _.RESOURCE }}"
+        name: Create
+        meta:
+          id: req_03af11a5f8164dbaae4d1ac374f7056e
+          created: 1791412073415
+          modified: 1791422455439
+          isPrivate: false
+          description: ""
+          sortKey: -1791379145772
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Porção de Frango a passarinho 2",	
+            	"price": 49.90
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.BASE_URL }}/{{ _.RESOURCE }}/2"
+        name: Update
+        meta:
+          id: req_1d9ecb2dafe04795a781e401cd248347
+          created: 1791416789867
+          modified: 1791424036031
+          isPrivate: false
+          description: ""
+          sortKey: -1791379145722
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Porção de Frango a passarinho",
+            	"price": 49.8
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.BASE_URL }}/{{ _.RESOURCE }}/2"
+        name: Remove
+        meta:
+          id: req_628f6c1c2d5141939672f8279605d66c
+          created: 1791422422239
+          modified: 1791571985823
+          isPrivate: false
+          description: ""
+          sortKey: -1791422422239
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    environment:
+      RESOURCE: products
+    environmentPropertyOrder:
+      "&":
+        - RESOURCE
+  - name: Restaurant-Table
+    meta:
+      id: fld_b3d3bcc59c4e4b57a41094f8d2063dc4
+      created: 1791571917807
+      modified: 1791572039814
+      sortKey: -1791379097834
+      description: ""
+    children:
+      - url: "{{ _.BASE_URL }}/{{ _.RESOURCE }}"
+        name: Index
+        meta:
+          id: req_740c807806b74ce091004f14fa5ed210
+          created: 1791571931698
+          modified: 1791572055409
+          isPrivate: false
+          description: ""
+          sortKey: -1791571931698
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    environment:
+      RESOURCE: restaurant-tables
+    environmentPropertyOrder:
+      "&":
+        - RESOURCE
+  - name: Rest Table Sessions
+    meta:
+      id: fld_411cbdda9b3845d6ad1ceab959a106d2
+      created: 1791573461437
+      modified: 1791593196286
+      sortKey: -1791379097934
+      description: ""
+    children:
+      - url: "{{ _.BASE_URL }}/{{ _.RESSOURCE }}"
+        name: Create
+        meta:
+          id: req_ce6aa505fcb74a8fadbe6a8138d1795d
+          created: 1791573474380
+          modified: 1791600001601
+          isPrivate: false
+          description: ""
+          sortKey: -1791573474380
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"table_id": 3
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.BASE_URL }}/{{ _.RESSOURCE }}/"
+        name: Index
+        meta:
+          id: req_d449f1facb3246ed9696a937612cf24b
+          created: 1791580088701
+          modified: 1791593523150
+          isPrivate: false
+          description: ""
+          sortKey: -1791580088701
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.BASE_URL }}/{{ _.RESSOURCE }}/2"
+        name: Close
+        meta:
+          id: req_c965d75e3360499398cc808d2000f799
+          created: 1791593085857
+          modified: 1791600017312
+          isPrivate: false
+          description: ""
+          sortKey: -1791593085857
+        method: PATCH
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    environment:
+      RESSOURCE: rest-tables-sessions
+  - name: Orders
+    meta:
+      id: fld_158a30cc4ffc46129871d9990dac56c5
+      created: 1791936391520
+      modified: 1791936402258
+      sortKey: -1791379097784
+      description: ""
+    children:
+      - url: "{{ _.BASE_URL }}/{{ _.RESOURCE }}"
+        name: Index
+        meta:
+          id: req_3caeb3255d484b48bb649a2e1c3a9dc1
+          created: 1791936391520
+          modified: 1791938803858
+          isPrivate: false
+          description: ""
+          sortKey: -1791571931698
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"table_session_id": 3,
+            	"product_id": 16,
+            	"quantity": 2
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.BASE_URL }}/{{ _.RESOURCE }}/table-session/2/total"
+        name: Index by Table session
+        meta:
+          id: req_c4811348e34c41a8a72efdcbeb38880a
+          created: 1791939142249
+          modified: 1791941226312
+          isPrivate: false
+          description: ""
+          sortKey: -1791939142249
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.BASE_URL }}/{{ _.RESOURCE }}/table-session/3"
+        name: Show By Table Session
+        meta:
+          id: req_6d7b6421363441d0b638eeb69b905f12
+          created: 1791940697527
+          modified: 1791940697527
+          isPrivate: false
+          description: ""
+          sortKey: -1791766114053
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    environment:
+      RESOURCE: orders
+    environmentPropertyOrder:
+      "&":
+        - RESOURCE
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_4f21c7123bee36dd57b3035879a816014fc63299
+    created: 1791378979300
+    modified: 1791378979300
+environments:
+  name: Base Environment
+  meta:
+    id: env_4f21c7123bee36dd57b3035879a816014fc63299
+    created: 1791378979269
+    modified: 1791378979269
+    isPrivate: false
+  subEnvironments:
+    - name: Dev Env
+      meta:
+        id: env_4f6729894cc44825abd4e2aadc2ad8ab
+        created: 1791379002373
+        modified: 1791379075789
+        isPrivate: false
+        sortKey: 1791379002373
+      data:
+        BASE_URL: localhost:3333
+      color: "#5cd6ff"
