@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { knexConnection } from "@/database/knex";
+import { knexConnection } from "@/database/knex-connection";
 import { z } from "zod";
 
 import { AppError } from "@/utils/AppError.js";

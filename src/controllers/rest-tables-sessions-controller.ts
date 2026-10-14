@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { z } from "zod";
 
-import { knexConnection } from "@/database/knex";
+import { knexConnection } from "@/database/knex-connection";
 import { AppError } from "@/utils/AppError";
 import { TABLES } from "@/database/tables-config";
 

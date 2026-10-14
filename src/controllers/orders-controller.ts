@@ -1,6 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import { z } from "zod";
 
+import { knexConnection } from "@/database/knex-connection";
+import { TABLES } from "@/database/tables-config";
+import { AppError } from "@/utils/AppError";
+
 class OrdersController {
   async create(request: Request, response: Response, next: NextFunction) {
     try {
@@ -12,9 +16,25 @@ class OrdersController {
 
       const { table_session_id, product_id, quantity } = bodySchema.parse(request.body);
 
-      return response
-        .status(201)
-        .json({ message: "Order created successfully", data: { table_session_id, product_id, quantity } });
+      const session = await knexConnection<RestTablesSessionRepository>(TABLES.restTableSessions)
+        .where({ id: table_session_id })
+        .first();
+
+      if (!session) {
+        throw new AppError("RestTableSession was not found", 404);
+      }
+
+      if (session.closed_at) {
+        throw new AppError("RestTableSession is already closed", 400);
+      }
+
+      const product = await knexConnection<ProductRepository>(TABLES.products).where({ id: product_id }).first();
+
+      if (!product) {
+        throw new AppError("Product was not found", 404);
+      }
+
+      return response.status(201).json({ message: "Order created successfully", data: { session, product } });
     } catch (error) {
       next(error);
     }

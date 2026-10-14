@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { knexConnection } from "@/database/knex";
+import { knexConnection } from "@/database/knex-connection";
 
 import { TABLES } from "@/database/tables-config";
 
