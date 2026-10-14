@@ -34,7 +34,14 @@ class OrdersController {
         throw new AppError("Product was not found", 404);
       }
 
-      return response.status(201).json({ message: "Order created successfully", data: { session, product } });
+      const order = await knexConnection(TABLES.orders).insert({
+        table_session_id,
+        product_id,
+        quantity,
+        price: product.price
+      });
+
+      return response.status(201).json({ message: "Order created successfully", data: { session, product, order } });
     } catch (error) {
       next(error);
     }
